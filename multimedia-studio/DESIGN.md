@@ -2,147 +2,147 @@
 
 A one-person motion, 3D and video studio in Schwerin. The site is a portfolio and lead generator: it must show moving work fast and turn visitors into project requests. Language: German first, with English (`/en`) and Arabic (`/ar`, right-to-left) mirrors.
 
-Reference implementation: `index-v2.html`. Copy its `<head>`, `:root` tokens, nav, mobile menu, footer and the shared script helpers (`inView`, `play`, `pause`, `bindVideo`, media skeleton, reveals, magnetic buttons) into every page so all pages behave the same.
-
-**Dials:** Variance 7 (offset, asymmetric where it helps) / Motion 6 (fluid CSS plus a few choreographed loops) / Density 3 (airy gallery).
+**Dials:** Variance 8 ("Offset Asymmetric", leaning artsy) / Motion 6 ("Fluid CSS", with a few choreographed moments) / Density 3 ("Art Gallery Airy").
 
 ---
 
 ## 1. Visual Theme & Atmosphere
 
-A bright, quiet gallery. The page is a pale slate wall, white cards hang on it with very soft, wide shadows, and the work (looping films, packshots, renders) carries all the colour. One hot orange accent marks every point of action.
+A dark, cinematic screening room. The interface is a quiet charcoal stage, and the work is the only thing lit. Surfaces recede; the looping product films, packshots and character renders carry all the color. One hot ember accent marks every point of action, the way a single tally light marks the live camera.
 
-Layouts are confident and roomy: big left-aligned statements, generous empty space, media in mixed aspect ratios. Motion is calm and springy. Things slide and settle; nothing blinks or spins for its own sake. A faint film grain sits over everything.
+Layouts are confident and offset: big left-aligned statements, generous empty space, media of varying aspect ratios that never line up into a predictable grid. Motion is weighty and calm. Things slide and settle with spring physics; nothing bounces, blinks or spins for its own sake. A faint film grain sits over everything, so the page feels photographed rather than rendered.
 
-Mood words: bright, precise, tactile, unhurried, crafted.
-
----
-
-## 2. Colour Palette & Roles
-
-Cool slate/zinc neutrals only. No warm greys or beige.
-
-| Token | Value | Role |
-|---|---|---|
-| `--bg` | `#F9FAFB` | Page background. Never pure white. |
-| `--card` | `#FFFFFF` | Cards, buttons (ghost), the CTA card. |
-| `--sunk` | `#F1F2F4` | Media placeholders, tool pills, icon wells, skeletons. |
-| `--ink` | `#18181B` | Headlines, primary text, dark bars and badges, service strips. |
-| `--ink-2` | `#3F3F46` | Nav links. |
-| `--mut` | `#71717A` | Body copy, captions, metadata, footer links (4.6:1 on `--bg`). |
-| `--line` | `rgba(203,213,225,.55)` | 1px card edges, nav and footer dividers. |
-| `--line-2` | `rgba(148,163,184,.45)` | Slightly stronger dividers in lists (the category hover list). |
-| `--acc` | `#FF4D00` | The single accent (see below). |
-| `--acc-ink` | `#C23A00` | Orange for **small** text only (labels, "Featured", link hover). 4.9:1. |
-| `--on-acc` | `#18181B` | Text and icons on orange fills. |
-| `--acc-soft` | `rgba(255,77,0,.09)` | Tinted background behind a highlighted item. |
-
-**Accent rules.** `#FF4D00` is the brand colour and stays fully saturated. Use it for primary button fills, the logo tile, active and hover states, focus rings, check circles and **one emphasised word per headline**. It should cover less than 5% of any screen.
-- Orange text in `--acc` is only allowed at headline size (28px and up). Smaller orange text uses `--acc-ink`.
-- Labels on orange fills are dark ink (`--on-acc`), never white. White on `#FF4D00` is only 3.4:1 and fails for button text.
-
-**Shadows:** `--shadow: 0 20px 40px -15px rgba(15,23,42,.08)` for resting cards, `--shadow-lg: 0 40px 80px -30px rgba(15,23,42,.18)` for hover and floating elements. Always slate-tinted, never black, never coloured glows (the one exception is a faint orange shadow under a hovered primary button).
-
-**Banned:** purple or blue glows, neon gradients, gradient text, a second accent colour (no green success, no blue links), pure `#000` or `#FFF` text.
+Mood words: nocturnal, precise, tactile, unhurried, crafted.
 
 ---
 
-## 3. Typography
+## 2. Color Palette & Roles
 
-- **One family:** Outfit (Google Fonts, weights 300 to 700) for everything.
-- **Headlines:** weight 600, letter-spacing `-.04em` to `-.045em`, line-height 1.02 to 1.05.
-  - Hero: `clamp(2.6rem, 4.6vw, 4.4rem)`
-  - Section (`.h2`): `clamp(2.2rem, 4vw, 3.75rem)`
-  - Max 2 lines on desktop where possible.
-- **Emphasised word in a headline:** same family and weight, `font-style:normal`, coloured `--acc` (`<em>` inside `.h2`). Example: "Alles, was dein Projekt **braucht.**"
-- **Italic:** used in exactly one place, the second word of each row title in the hover list ("3D *Produkt*"). Outfit has no true italic, and the browser's slanted version looks right at this size, so no serif is loaded. Don't use italic anywhere else.
-- **Body:** 400, 16 to 17px, line-height 1.6 to 1.65, `--mut`, max about 56 characters per line (`.lead`).
-- **Card titles:** 20px / 600 / `-.02em`. Captions and metadata: 13 to 14px, `--mut`, joined with " · ".
+One palette, cool zinc neutrals only. Never mix in warm greys or beige.
+
+- **Stage Charcoal** (#0C0C0E) - Page background. The darkened screening room. Never pure black.
+- **Panel Zinc** (#151518) - Cards, media frames, menus and the contact panel.
+- **Raised Zinc** (#1D1D21) - Hover fills, tool pills, input backgrounds, skeleton loaders.
+- **Projector White** (#EDEDEB) - Headlines and primary text. Off-white, never #FFFFFF.
+- **Muted Steel** (#9A9AA2) - Body copy, captions, project metadata, footer links.
+- **Dim Steel** (#5E5E66) - Disabled states and inactive marquee words.
+- **Hairline** (rgba(237,237,235,0.08)) - 1px structural lines and card edges.
+- **Ember Signal** (#FF4D00) - The single accent: primary CTA fill, the logo tile, active states, focus rings, one emphasized word per headline. Text on Ember is Stage Charcoal (#0C0C0E) for contrast.
+
+**Accent exception, documented on purpose:** Ember Signal is the studio's existing brand color and is fully saturated. It breaks the usual "under 80% saturation" rule; that is accepted only for brand fidelity. Compensate by using it sparingly. It should cover less than 5% of any screen.
+
+**Banned:** purple or blue glows, neon gradients, gradient text on headlines, a second accent color anywhere (no green success badges, no blue links), pure #000000 or #FFFFFF.
+
+---
+
+## 3. Typography Rules
+
+- **Display:** Satoshi, Bold (700) and Medium (500). Tight tracking (-0.035em), compressed leading (1.0 to 1.05). Hierarchy comes from weight and color, not raw size. Headlines max 2 lines on desktop. Scale with `clamp(2.5rem, 5vw, 4.75rem)` for the hero and `clamp(2rem, 4vw, 3.75rem)` for section headlines.
+- **Emphasis inside a headline:** the same family in Bold, colored Ember Signal (for example "Motion Design, 3D und Video **aus einer Hand.**"). Never switch to a serif for the emphasized word.
+- **Body:** Satoshi Regular (400), 16 to 18px, line-height 1.65, Muted Steel, max 60 characters per line.
+- **Mono:** JetBrains Mono, 12 to 13px, tracking 0.04em. Only for project metadata (tool, discipline, year), timecodes and stat captions. Never for paragraphs.
 - **Arabic pages:** pair with IBM Plex Sans Arabic at matching weights; mirror the layout with `dir="rtl"`.
-- **Banned:** Inter, Roboto, Arial, Helvetica, generic serifs, all-caps paragraphs, small uppercase eyebrows above every heading, numbered section labels.
+- **Banned:** Inter, Roboto, Arial, Helvetica, any generic serif (Times, Georgia, Garamond). No all-caps paragraphs. No headline wider than 2 lines on desktop.
 
 ---
 
-## 4. Shape, Spacing & Layout
+## 4. Hero Section
 
-- Container `.wrap`: max-width 1400px, side padding 40px (20px below 768px).
-- Section spacing `.sec`: 140px top and bottom (104px on phones). Follow-on sections use `padding-top:0` so the gap between sections stays one unit.
-- Radii: **2.5rem** (`--R`) for cards, strips and the CTA card; 2rem for project frames; 999px for buttons, chips and pills; 14 to 22px for small tiles.
-- Grids always use `minmax(0,1fr)` columns and `min-width:0` children so marquees or long words never widen the page.
-- **Card titles and descriptions sit below the card** (`figure` + `figcaption`, or a `.cap` row), never laid over footage. The only text allowed on media is inside the dark service strips, over a bottom gradient.
-- Section headers stack: headline, then an optional `.lead` underneath (or headline left and a single button right).
-- Never put 3 equal cards in a row. Never use 3 or more image-and-text zigzag rows in a row.
-- Below 768px every multi-column layout becomes one column. No horizontal page scroll, ever (marquee tracks are clipped by an `overflow:hidden` parent).
-- Full-height sections use `dvh`, never `100vh`.
+- **Structure:** asymmetric and left-aligned. The headline spans the top; below it sits a split with a short supporting line plus one CTA on the left (4 of 12 columns) and a wide looping hero film on the right (8 of 12 columns, 16:9, Panel Zinc frame).
+- **Signature move, inline image typography:** small rounded clips of real renders (headset, perfume bottle, coffee pack, character) sit between words of the headline at cap height, about 1.8em wide and 0.8em tall, fully rounded. They act as visual punctuation. On mobile they drop below the headline as a horizontal row.
+- **Copy:** headline max 8 words, supporting line max 20 words.
+- **CTA restraint:** exactly one primary CTA, "Projekt starten". No secondary button in the hero.
+- **No overlap:** text never sits on top of media. Every element owns its own zone.
+- **Banned:** centered hero, stats or trust strips inside the hero, location eyebrows, "Scroll", bouncing chevrons, mouse-wheel icons.
 
 ---
 
-## 5. Components
+## 5. Component Stylings
 
-**Nav (`header.nav`).** Sticky, 72px, `rgba(249,250,251,.82)` with a 16px backdrop blur and a 1px bottom line. Grid `1fr auto 1fr`: logo tile + "Multimedia Studio." left, 4 links centred (Portfolio, Services, Über mich, Kontakt), language switch `DE · EN · AR` plus "Projekt starten" right. Below 960px: logo and a 44px round menu button that opens a full-screen `--bg` panel with 40px stacked links sliding up with a 70ms stagger. Set the current page's link to `aria-current="page"` and give it `color:var(--ink);font-weight:600`.
-
-**Buttons.** Full pills, 15px / 500, min height 44px, padding `6px 6px 6px 24px` with a 38px round icon well on the right (Phosphor `ph-arrow-up-right` for contact, `ph-arrow-right` for internal links).
-- `.btn.pri`: orange fill, dark label, icon well `rgba(24,24,27,.1)`, soft orange shadow on hover.
-- `.btn.ghost`: white fill, 1px `--line` inset ring, `--shadow`, icon well `--sunk`.
-- Hover nudges the icon 2px up-right with a spring. Press scales to .98. `.mag` adds a magnetic pull (mouse only, off with reduced motion).
-- One label per intent: "Projekt starten" / "Projekt anfragen" to contact, "Portfolio ansehen" / "Alle ansehen" to the portfolio.
-
-**Project tiles (`.work` in a CSS-columns masonry, `columns:3 320px`).** 1px "spotlight" frame (`.spot`) whose border glows orange under the cursor, white inner plate with 8px padding, media with 1.6rem radius. Hover lifts 4px and scales the clip to 1.04. Title and metadata in a `.cap` row below.
-
-**Bento cards (`figure.bx`).** White `.card`, 320px high, 2.5rem radius, 1px `--line`, `--shadow`, `overflow:hidden`, caption below. Spans on the 10-column grid; 2 columns under 1100px, 1 under 768px.
-
-**Expanding service strips (`.accordion`).** 4 dark (`--ink`) strips, 580px high, 14px gap, 2.5rem radius, each with a looping clip at 35% opacity. Closed: vertical title bottom-left. Hover: `flex` 1 to 3.6 over 1s, clip to full opacity, big two-line title + tag fade up. First strip is open (and playing) when nothing is hovered. Under 900px: stacked 300px cards, always open, clips play when in view.
-
-**Hover list (`.split` + `.cat`).** Left column sticky at `top:120px` (headline with one orange word, `.lead`, ghost button). Right column: rows with number, title (second word italic), tag line and a 48px round arrow. Hover: title slides 14px right, the italic word turns orange, the arrow circle fills orange and rotates 45deg, a 180px tilted preview pops in with a spring. The preview only shows when the list is at least 680px wide (container query), so it never covers the title. Under 960px the columns stack and there is no preview.
-
-**Contact CTA (`.cta`).** Scrolling wall of poster frames (from `assets/work-list.js`) behind a radial `--bg` wash, one white card (2.5rem, `--shadow-lg`) on top with headline, `.lead`, primary + ghost button.
-
-**Footer.** 1px top line, grid `1.6fr 1fr 1fr 1.2fr` (Studio / Services / Info), bottom row with © Impressum · Datenschutz and social links.
-
-**Media states.** Every clip or image sits in a `.media` wrapper:
-- Loading: `--sunk` fill with a diagonal shimmer (a translated pseudo-element).
-- Failed: the element is hidden and "Vorschau nicht verfügbar" is centred in `--mut`.
-- Small media (`.media.sm`: avatars, hover previews): on failure show only the plain grey shape, no message. `img` elements use `color:transparent` so broken-image alt text never shows.
-- Images with a second source use `data-fallback="…png"`; the script tries it before marking the media as failed.
-
-**Icons.** Phosphor (web build from unpkg), regular weight, 16 to 20px. Fill/bold variants only for the marquee asterisk and check marks. No emojis.
+- **Primary button:** a full pill. Ember Signal fill, Stage Charcoal label, 14px vertical and 24px horizontal padding. A trailing arrow icon (Phosphor Light, `arrow-up-right`) nudges 3px up and right on hover. On press the whole button scales to 0.98. No glow; at most a soft, ember-tinted shadow on hover.
+- **Secondary button:** a full pill with a Hairline outline and Projector White label. Hover fills it Projector White with a Stage Charcoal label. Only outside the hero.
+- **One label per intent across the whole site:** "Projekt starten" for anything that leads to contact, "Portfolio ansehen" for anything that leads to the portfolio.
+- **Media cards (project tiles):** 16px corner radius, Panel Zinc fill, no border. The video fills the card and plays on hover (in view on touch). On hover the clip scales to 1.04 over 1s. Title and metadata sit *below* the media, never as pills or labels on top of the footage.
+- **Content cards (bento tiles):** 16px radius, Panel Zinc, a 1px inner highlight at the top edge (rgba(255,255,255,0.06)). Shadows only when elevation means something, always tinted dark zinc (`0 30px 60px -30px rgba(0,0,0,0.8)`).
+- **Expanding service strips:** a row of 4 tall media strips (600px high, 12px gap). Closed strips show their title written vertically at the bottom-left. Hovering a strip widens it to about 3.5 times the others, brings its video to full opacity, and fades up a large two-line title plus a mono tag line. The first strip is open when nothing is hovered. On mobile they become stacked 300px cards, always open, with no vertical text.
+- **Inputs (contact form):** label above in Projector White, field in Raised Zinc with a Hairline edge and 12px radius, helper text below in Muted Steel, error text below in Ember Signal. Focus ring: 2px Ember Signal. No floating labels; no placeholder used as a label.
+- **Loaders:** a skeleton block with the exact aspect ratio of the media it replaces, in Raised Zinc with a slow diagonal shimmer. No circular spinners.
+- **Error state for media:** if a clip fails, the frame stays and shows "Vorschau nicht verfügbar" centered in Muted Steel.
+- **Empty states:** for example a portfolio filter with no results. Show one muted poster frame, a one-line message, and a "Filter zurücksetzen" pill.
+- **Icons:** Phosphor Light only, 1.5px stroke, sized 16 to 20px. No emojis anywhere.
 
 ---
 
-## 6. Motion & Interaction
+## 6. Layout Principles
 
-- Easing: `--ease: cubic-bezier(.16,1,.3,1)` for fades and slides (500 to 1100ms); `--spring: cubic-bezier(.34,1.56,.64,1)` for small elements that should overshoot (icons, badges, previews, list FLIP). Linear only for constant-speed loops (marquee, poster stream, work wall).
-- Entry: `.rv` fades up 28px when it enters the viewport; stagger with `style="--i:n"` (80ms steps).
-- Animate only `transform` and `opacity`. Documented exceptions: the strips' `flex` change and the 4K frame's `clip-path` morph.
-- No scroll listeners. Use `IntersectionObserver` (`inView`) for reveals, video play and every loop. Loops (tools reshuffle, format morph, badge, poster stream, inclusion ticks, scramble line) run only while visible.
-- Video: muted, looped, `playsinline`. Hero clip autoplays. Everything else plays on hover where the device has a real mouse (`(hover:hover) and (pointer:fine)`) and plays when in view otherwise.
-- `prefers-reduced-motion`: reveals appear instantly, all loops stop, videos never start on their own, typewriter and scramble stay on their first word.
-- Blur only on the sticky nav and small glass chips. Grain is a fixed `pointer-events:none` overlay.
+- 12-column CSS Grid, max-width 1360px, 40px side padding (20px on mobile).
+- Section spacing `clamp(6rem, 12vw, 10rem)` vertically. Sections should feel like separate scenes.
+- Each section uses a different layout family. Approved families for this site:
+  1. Asymmetric hero split with inline image typography.
+  2. A single kinetic statement line ("Ich gestalte ..." with a rotating word in Ember Signal).
+  3. Project gallery as an offset two-column masonry (right column starts lower), or as a horizontal scroll-snap rail with arrow controls.
+  4. Expanding service strips.
+  5. Asymmetric bento with exactly 5 cells for the 5 promises (Ultra-HD video, 4K, tools, personal with stats, all-inclusive price). Desktop spans 8+4 / 4+5+3. At least 3 cells carry real visual variation (video, portrait, Ember fill).
+  6. Fanned packshot stack (4 portrait clips rotated -21, -7, 7 and 21 degrees, spreading on hover).
+  7. Full-bleed contact scene: the scrolling wall of poster frames, darkened, with one solid Panel Zinc card on top.
+- Never use 3 equal cards in a row. Never use 3 or more consecutive image-and-text zigzag rows.
+- Section headers stack vertically: headline, then an optional short paragraph underneath. No small explainer floating in the top-right corner.
+- Full-height sections use `min-height: 100dvh`, never `100vh`.
+- No absolute-positioned text stacked over other content. Overlays on media are limited to a bottom gradient behind a title.
 
 ---
 
 ## 7. Responsive Rules
 
-- Breakpoints: 1100px (bento to 2 columns, work wall to 6 columns), 960px (mobile nav, hover list stacks), 900px (hero stacks, strips stack), 767px (single column everywhere, 20px gutters).
-- Tap targets at least 44 by 44px. Body text never below 16px in paragraphs.
-- Hover-only behaviours switch to "always open" or "play when in view" on touch.
-- Arabic pages mirror every asymmetric layout.
+- Below 768px every multi-column layout collapses to a single column. No horizontal page scroll, ever (the only sideways movement allowed is a deliberate scroll-snap rail).
+- Headlines scale with `clamp()`. Body text never below 16px.
+- Every tap target at least 44 by 44px.
+- Desktop nav (logo, 4 links, language switch DE / EN / AR, one CTA, all on one line, 68px high) becomes a logo plus a menu button. The menu opens a full-screen Stage Charcoal panel with large stacked links that slide up in a staggered cascade.
+- Hover-only behaviors (video on hover, expanding strips, fan spread) switch to "play when in view" and "always open" on touch devices.
+- Arabic pages mirror all asymmetric layouts.
 
 ---
 
-## 8. Content Rules
+## 8. Motion & Interaction
 
-- Real content only: the actual project names (3D Headset, Cosmetic Product, Character Animation, Weekend Parfum, Keyboard, Koffee, Qahwa, ELFER, Norée …), real tools (Blender, After Effects, Illustrator, DaVinci Resolve, InDesign, Premiere Pro) and real figures (10+ Jahre, 120+ Projekte, 4 Sprachen).
-- No invented testimonials, client logos or metrics. No AI clichés ("Elevate", "Seamless", "Unleash").
-- Tone: direct, first person, concrete ("Du arbeitest direkt mit mir."). Short sentences. **No em-dashes** in visible text; use commas, colons or periods.
-- Imagery: always the studio's own renders and poster frames, from `assets/videos/web/` and `assets/posters/`.
+- **Physics:** spring feel for interactive elements (stiffness 100, damping 20). For CSS, use `cubic-bezier(0.16, 1, 0.3, 1)` at 500 to 900ms. No linear easing, except for constant-speed loops (the marquee and the poster wall).
+- **Entry:** sections fade up 24px into place as they enter the viewport (IntersectionObserver). Lists and grids cascade with a 60 to 80ms stagger.
+- **Perpetual micro-loops, used only where they mean something:**
+  - One services marquee (the only marquee on the page).
+  - The rotating word in the statement line.
+  - The slowly scrolling poster wall behind the contact card.
+  - A gentle shimmer on loading skeletons.
+- **Video:** clips are muted, looped and inline. Hero clip autoplays. All others play on hover (desktop) or when in view (touch) and pause when they leave.
+- **Performance:** animate only `transform` and `opacity`. Grain lives on a fixed, pointer-events-none overlay. Blur is only allowed on the fixed nav. No scroll event listeners; use IntersectionObserver or CSS scroll-driven animations.
+- **Reduced motion:** with `prefers-reduced-motion`, all loops stop, reveals appear instantly and videos do not autoplay.
 
 ---
 
-## 9. Building another page
+## 9. Content Rules
 
-1. Start from `index-v2.html`: keep `<head>`, tokens, nav (mark the current link), mobile menu, footer, `assets/work-list.js` and the shared script helpers.
-2. Open with a left-aligned hero or page header: `.h2`/`h1` with one orange word, a `.lead`, at most one primary and one ghost button. No centred hero.
-3. Pick a different layout family for each section from: masonry, expanding strips, hover list, bento, swipe stack, statement line, CTA over the work wall.
-4. End with the CTA section and footer.
-5. Check at 1440px and 390px: no horizontal scroll, no console errors, all media states work.
+- Real content only: the actual project names (3D Headset, Cosmetic Product, Character Animation, Weekend Parfum, Keyboard, Koffee), real tools (Blender, After Effects, Illustrator, DaVinci Resolve, InDesign, Premiere Pro) and real figures (10+ Jahre, 120+ Projekte, 4 Sprachen).
+- No invented testimonials, client logos or metrics.
+- Copy tone: direct, first person, concrete ("Du arbeitest direkt mit mir."). Short sentences, periods and commas. No em-dashes.
+- Imagery: always the studio's own renders and poster frames. Never stock photography.
+
+---
+
+## 10. Anti-Patterns (Never Do)
+
+- No emojis.
+- No Inter, Roboto, Arial or generic serif fonts.
+- No pure black (#000000) or pure white (#FFFFFF).
+- No neon or outer-glow shadows, no purple/blue AI gradients, no gradient text.
+- No second accent color.
+- No custom mouse cursors.
+- No overlapping text and media; no pills or labels laid over footage.
+- No 3 equal cards in a row.
+- No centered hero.
+- No more than one CTA in the hero; no two different labels for the same action.
+- No "Scroll to explore", scroll arrows, bouncing chevrons or mouse-wheel icons.
+- No small uppercase eyebrow above every heading, no numbered section labels ("01 / Services").
+- No generic names or invented brands (John Doe, Acme, Nexus).
+- No fake round numbers (99.99%, 50%) or invented stats.
+- No AI copywriting clichés ("Elevate", "Seamless", "Unleash", "Next-Gen").
+- No broken image links. If a placeholder is unavoidable, use `https://picsum.photos/seed/{project}/{w}/{h}`.
+- No `100vh` full-height sections, no horizontal page scroll on mobile.
