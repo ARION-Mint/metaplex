@@ -208,6 +208,41 @@ nav{
   .stats{gap:28px}
 }
 
+/* ============ hero reel — the clips play one after another like a showreel ============ */
+.reel{position:relative;z-index:3;align-self:flex-end;width:min(460px,36vw);margin:-30px 48px 56px 0}
+.reel-frame{padding:6px;border-radius:24px;background:rgba(255,255,255,.028);box-shadow:inset 0 0 0 1px var(--hair),0 40px 90px -40px rgba(0,0,0,.9)}
+.reel-link{display:block}
+.reel-stage{position:relative;aspect-ratio:16/10;background:var(--core2);overflow:hidden;border-radius:18px}
+.reel-stage video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(1.06);
+  transition:opacity .9s var(--ease),transform 4s var(--ease);
+}
+.reel-stage video.on{opacity:1;transform:none}
+.reel-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(8,8,9,.35),transparent 40%)}
+.reel-stage.failed::before{content:"Vorschau nicht verfügbar";position:absolute;inset:0;z-index:1;display:grid;place-items:center;font-size:13px;color:var(--mut)}
+.reel-chip{
+  position:absolute;top:14px;left:14px;z-index:2;display:inline-flex;align-items:center;gap:8px;
+  font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
+  background:rgba(10,10,11,.55);box-shadow:inset 0 0 0 1px var(--hair2);border-radius:999px;padding:6px 12px;
+}
+.reel-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc);animation:reelDot 1.8s var(--ease) infinite}
+@keyframes reelDot{50%{opacity:.25}}
+.reel-cap{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:16px 8px 0}
+.reel-txt{transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.reel.swap .reel-txt{opacity:0;transform:translateY(6px)}
+.reel-title{display:block;font-size:17px;font-weight:500;letter-spacing:-.02em;transition:color .4s var(--ease)}
+.reel-link:hover .reel-title{color:var(--acc)}
+.reel-meta{display:block;font-size:12.5px;color:var(--mut);margin-top:2px}
+.reel-no{font-size:12px;color:var(--mut);letter-spacing:.1em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.reel-segs{display:flex;gap:6px;padding:10px 8px 0}
+.reel-seg{flex:1;height:16px;display:flex;align-items:center}
+.reel-seg span{display:block;width:100%;height:2px;border-radius:2px;background:var(--hair2);overflow:hidden}
+.reel-seg i{display:block;height:100%;background:var(--acc);transform:scaleX(0);transform-origin:left center}
+.reel-seg.done i{transform:scaleX(1)}
+@media(max-width:860px){.reel{align-self:stretch;width:auto;margin:28px 22px 8px}}
+@media(prefers-reduced-motion:reduce){.reel-chip::before{animation:none}}
+
 /* ============ tools band ============ */
 .band{position:relative;overflow:hidden;padding:34px 0;margin-top:8px}
 .band::after{
@@ -623,6 +658,28 @@ footer{padding:120px 0 0;overflow:hidden}
         <span class="eyebrow rv">Multimedia Studio · Schwerin</span>
       </div>
 
+      <!-- hero reel: my clips play one after another -->
+      <div class="reel rv" id="reel" style="--d:.35s">
+        <a class="reel-link" href="portfolio.html">
+          <div class="reel-frame">
+            <div class="reel-stage" id="reelStage">
+            <video data-src="assets/videos/web/featured-headset.mp4" poster="assets/posters/headset.jpg" data-title="3D Headset" data-meta="Produktanimation · Blender" muted loop playsinline preload="none"></video>
+            <video data-src="assets/videos/web/cosmetic.mp4" data-title="Cosmetic Product" data-meta="Packshot · Look Dev" muted loop playsinline preload="none"></video>
+            <video data-src="assets/videos/web/character.mp4" data-title="Character Animation" data-meta="Modellierung · Rigging" muted loop playsinline preload="none"></video>
+            <video data-src="assets/videos/web/koffee.mp4" data-title="Koffee" data-meta="3D Packshot · Animation" muted loop playsinline preload="none"></video>
+            <video data-src="assets/videos/web/keyboard.mp4" data-title="Keyboard" data-meta="3D Produkt · Animation" muted loop playsinline preload="none"></video>
+            <video data-src="assets/videos/web/weekend-parfum.mp4" data-title="Weekend Parfum" data-meta="Packshot · Branding" muted loop playsinline preload="none"></video>
+              <span class="reel-chip">Aus dem Studio</span>
+            </div>
+          </div>
+          <div class="reel-cap">
+            <div class="reel-txt"><span class="reel-title" id="reelTitle">3D Headset</span><span class="reel-meta" id="reelMeta">Produktanimation · Blender</span></div>
+            <span class="reel-no reel-txt" id="reelNo">01 / 06</span>
+          </div>
+        </a>
+        <div class="reel-segs"><button class="reel-seg" type="button" aria-label="3D Headset zeigen"><span><i></i></span></button><button class="reel-seg" type="button" aria-label="Cosmetic Product zeigen"><span><i></i></span></button><button class="reel-seg" type="button" aria-label="Character Animation zeigen"><span><i></i></span></button><button class="reel-seg" type="button" aria-label="Koffee zeigen"><span><i></i></span></button><button class="reel-seg" type="button" aria-label="Keyboard zeigen"><span><i></i></span></button><button class="reel-seg" type="button" aria-label="Weekend Parfum zeigen"><span><i></i></span></button></div>
+      </div>
+
       <div class="bottom">
         <h1 class="rv" style="--d:.1s">Motion Design, 3D&nbsp;&amp; Video — aus <em>einer Hand.</em></h1>
         <div class="side rv" style="--d:.25s">
@@ -1000,6 +1057,55 @@ footer{padding:120px 0 0;overflow:hidden}
     gl.drawArrays(gl.TRIANGLES,0,3);
     if(!reduced)requestAnimationFrame(fr);
   })(performance.now());
+})();
+
+/* ============ hero reel: clips play in turn, caption and progress follow ============ */
+(function(){
+  var reel=document.getElementById('reel');if(!reel)return;
+  var REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stage=document.getElementById('reelStage');
+  var vids=[].slice.call(stage.querySelectorAll('video'));
+  var segs=[].slice.call(reel.querySelectorAll('.reel-seg'));
+  var tEl=document.getElementById('reelTitle'),mEl=document.getElementById('reelMeta'),nEl=document.getElementById('reelNo');
+  var D=3800,cur=-1,anim=null,inview=false,hover=false,swapT=null;
+  function pad(n){return (n<10?'0':'')+n;}
+  function load(v){if(!v.getAttribute('src'))v.setAttribute('src',v.getAttribute('data-src'));}
+  vids.forEach(function(v){
+    v.addEventListener('error',function(){v.setAttribute('data-failed','1');if(vids[cur]===v)stage.classList.add('failed');});
+  });
+  function running(){return inview&&!hover&&!document.hidden;}
+  function sync(){
+    var v=vids[cur];if(!v)return;
+    if(running()&&!REDUCED){v.play().catch(function(){});if(anim)anim.play();}
+    else{v.pause();if(anim)anim.pause();}
+  }
+  function show(k,instant){
+    if(k===cur)return;
+    if(cur>-1){vids[cur].classList.remove('on');vids[cur].pause();}
+    if(anim){anim.cancel();anim=null;}
+    segs.forEach(function(s,j){s.classList.toggle('done',j<k);});
+    cur=k;
+    var v=vids[cur];load(v);load(vids[(cur+1)%vids.length]);
+    try{v.currentTime=0;}catch(e){}
+    v.classList.add('on');
+    stage.classList.toggle('failed',v.getAttribute('data-failed')==='1');
+    function text(){tEl.textContent=v.getAttribute('data-title');mEl.textContent=v.getAttribute('data-meta');nEl.textContent=pad(cur+1)+' / '+pad(vids.length);}
+    if(instant){text();}
+    else{reel.classList.add('swap');clearTimeout(swapT);swapT=setTimeout(function(){text();reel.classList.remove('swap');},250);}
+    if(!REDUCED){
+      anim=segs[cur].querySelector('i').animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:D,fill:'forwards'});
+      anim.onfinish=function(){show((cur+1)%vids.length);};
+    }
+    sync();
+  }
+  segs.forEach(function(s,j){s.addEventListener('click',function(){show(j);});});
+  reel.addEventListener('mouseenter',function(){hover=true;sync();});
+  reel.addEventListener('mouseleave',function(){hover=false;sync();});
+  document.addEventListener('visibilitychange',sync);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){inview=e.isIntersecting;sync();});},{threshold:.25}).observe(reel);
+  }else{inview=true;}
+  show(0,true);
 })();
 
 /* ============ island nav: hamburger + full-screen menu ============ */
