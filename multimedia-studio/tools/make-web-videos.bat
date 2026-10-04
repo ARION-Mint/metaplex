@@ -3,8 +3,9 @@ setlocal enabledelayedexpansion
 rem ================================================================
 rem  make-web-videos.bat  -  Multimedia Studio
 rem
-rem  1. Lege deine ORIGINAL-Videos in den Ordner "videos-original"
-rem     (neben dieser Datei, im Website-Hauptordner).
+rem  1. Lege deine ORIGINAL-Videos in den Ordner
+rem     assets\videos\videos-original
+rem     (diese Datei selbst liegt im Website-Hauptordner, neben index.html).
 rem     Dateinamen am besten klein und mit Bindestrich, z.B. lumen-serum.mov
 rem  2. Doppelklick auf diese Datei.
 rem
@@ -15,6 +16,7 @@ rem  Danach wird assets\work-list.js neu geschrieben (Bilderwand).
 rem  Deine Originale werden NICHT veraendert.
 rem ================================================================
 cd /d "%~dp0"
+set "SRC=assets\videos\videos-original"
 
 where ffmpeg >nul 2>nul
 if errorlevel 1 (
@@ -27,12 +29,12 @@ if errorlevel 1 (
   exit /b 1
 )
 
-if not exist "videos-original" mkdir "videos-original"
+if not exist "%SRC%" mkdir "%SRC%"
 if not exist "assets\videos\web" mkdir "assets\videos\web"
 if not exist "assets\posters" mkdir "assets\posters"
 
 set /a made=0
-for %%F in ("videos-original\*.mp4" "videos-original\*.mov" "videos-original\*.mkv" "videos-original\*.webm" "videos-original\*.avi" "videos-original\*.m4v") do (
+for %%F in ("%SRC%\*.mp4" "%SRC%\*.mov" "%SRC%\*.mkv" "%SRC%\*.webm" "%SRC%\*.avi" "%SRC%\*.m4v") do (
   set "name=%%~nF"
   set "name=!name: =-!"
   if not exist "assets\videos\web\!name!.mp4" (
@@ -55,5 +57,6 @@ for %%P in ("assets\posters\w-*.jpg") do >> "assets\work-list.js" echo   "%%~nP"
 echo.
 echo  Fertig. Neue Web-Videos: !made!
 echo  Liste der Videos:  assets\videos\web
+echo  Hinweis: Den Ordner assets\videos\videos-original NICHT auf den Webserver hochladen.
 echo.
 pause
