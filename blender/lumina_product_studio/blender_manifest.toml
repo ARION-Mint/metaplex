@@ -1,0 +1,19 @@
+schema_version = "1.0.0"
+
+id = "lumina_product_studio"
+version = "1.0.0"
+name = "Lumina Product Studio"
+tagline = "One-click product shots: lights, sets, camera, motion, grading"
+maintainer = "Lumina Product Studio contributors"
+type = "add-on"
+
+blender_version_min = "4.2.0"
+
+license = [
+  "SPDX:GPL-3.0-or-later",
+]
+
+tags = ["Camera", "Lighting", "Render", "Animation", "Scene"]
+
+[permissions]
+files = "Save and load your studio styles and write batch renders"
